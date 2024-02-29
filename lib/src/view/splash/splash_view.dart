@@ -3,8 +3,8 @@ import 'package:companioneyes/src/viewmodel/splash/splash_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class SplashScreen extends StatelessWidget {
-  const SplashScreen({super.key});
+class SplashView extends StatelessWidget {
+  const SplashView({super.key});
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
