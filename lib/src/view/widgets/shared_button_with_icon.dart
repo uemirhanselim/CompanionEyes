@@ -7,10 +7,14 @@ class SharedButtonWithIcon extends StatelessWidget {
     required this.title,
     required this.isSettings,
     required this.onPressed,
+    this.iconPath,
+    this.isElevationOn = false,
   });
   final String title;
   final bool isSettings;
   final VoidCallback onPressed;
+  final String? iconPath;
+  final bool isElevationOn;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -22,8 +26,8 @@ class SharedButtonWithIcon extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
             ),
             backgroundColor:
-                isSettings ? UIHelper.plaster : UIHelper.saltwaterDenim,
-            elevation: 10,
+                !isElevationOn ? UIHelper.plaster : UIHelper.saltwaterDenim,
+            elevation: isElevationOn ? 10 : 0,
           ),
           onPressed: onPressed,
           child: Row(
@@ -31,6 +35,16 @@ class SharedButtonWithIcon extends StatelessWidget {
             children: [
               Row(
                 children: [
+                  isSettings
+                      ? Padding(
+                          padding: EdgeInsets.only(
+                              right: UIHelper.getDynamicWidth(context, 0.02)),
+                          child: Image.asset(
+                            iconPath ?? "",
+                            scale: 0.95,
+                          ),
+                        )
+                      : const SizedBox.shrink(),
                   Text(
                     title,
                     style: TextStyle(
@@ -38,12 +52,13 @@ class SharedButtonWithIcon extends StatelessWidget {
                           context,
                           UIHelper.fontSize14,
                         ),
-                        color: isSettings ? UIHelper.black : UIHelper.white,
+                        color: !isElevationOn ? UIHelper.black : UIHelper.white,
                         fontWeight: FontWeight.w600),
                   ),
                 ],
               ),
-              const Icon(Icons.chevron_right, color: UIHelper.white),
+              Icon(Icons.chevron_right,
+                  color: isElevationOn ? UIHelper.white : UIHelper.black),
             ],
           )),
     );
