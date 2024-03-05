@@ -1,7 +1,12 @@
-import 'package:companioneyes/src/view/auth/forgot_password_screen.dart';
+import 'package:companioneyes/src/local/user_status_database.dart';
+import 'package:companioneyes/src/view/auth/code_view.dart';
+import 'package:companioneyes/src/view/auth/congrats_view.dart';
+import 'package:companioneyes/src/view/auth/device_access_view.dart';
+import 'package:companioneyes/src/view/auth/forgot_password_view.dart';
 import 'package:companioneyes/src/view/auth/login_view.dart';
-import 'package:companioneyes/src/view/auth/privacy_and_terms_screen.dart';
+import 'package:companioneyes/src/view/auth/privacy_and_terms_view.dart';
 import 'package:companioneyes/src/view/auth/register_view.dart';
+import 'package:companioneyes/src/view/home/home_view.dart';
 import 'package:companioneyes/src/view/opening/opening_view.dart';
 import 'package:companioneyes/src/view/splash/splash_view.dart';
 import 'package:flutter/material.dart';
@@ -11,14 +16,18 @@ import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Firebase initialization
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(MyApp());
-}
- 
 
- 
+  // Local database initialization
+  await UserStatusDatabase.initialize();
+
+  runApp(const MyApp());
+}
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -30,7 +39,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: GoogleFonts.montserrat().fontFamily,
       ),
-      home: const PrivacyAndTermsView(),
+      home: const HomeView(),
     );
   }
 }
