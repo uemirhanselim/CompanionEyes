@@ -1,8 +1,8 @@
+import 'package:companioneyes/src/package/svg_image.dart';
 import 'package:companioneyes/src/utils/ui_helper.dart';
 import 'package:companioneyes/src/view/widgets/shared_button.dart';
 import 'package:companioneyes/src/viewmodel/auth/congrats_viewmodel.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 class CongratsView extends StatelessWidget {
@@ -18,36 +18,13 @@ class CongratsView extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 UIHelper.emptySpaceHeight(context, 0.1),
-                SvgPicture.asset(
-                  UIHelper.successfulSvg,
-                ),
+                _asset,
                 UIHelper.emptySpaceHeight(context, 0.04),
-                Text(
-                  "Congrats!",
-                  style: TextStyle(
-                    fontSize: UIHelper.getDynamicFontSize(
-                        context, UIHelper.fontSize28),
-                    fontWeight: FontWeight.bold,
-                    color: UIHelper.black,
-                  ),
-                ),
+                _congratsText(context),
                 UIHelper.emptySpaceHeight(context, 0.02),
-                Text(
-                  "You have updated your password.\nNow navigate back to sign in screen.",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: UIHelper.getDynamicFontSize(
-                        context, UIHelper.fontSize16),
-                    color: UIHelper.blackOut,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
+                _definitionText(context),
                 const Spacer(),
-                SharedButton(
-                  title: "Go to Sign In",
-                  color: UIHelper.black,
-                  onPressed: () {},
-                ),
+                _button(),
                 UIHelper.emptySpaceHeight(context, 0.04),
               ],
             ),
@@ -56,4 +33,33 @@ class CongratsView extends StatelessWidget {
       ),
     );
   }
+
+  SvgImage get _asset => const SvgImage(
+        assetName: UIHelper.successfulSvg,
+      );
+
+  SharedButton _button() => SharedButton(
+        title: "Go to Sign In",
+        color: UIHelper.black,
+        onPressed: () {},
+      );
+
+  Text _definitionText(BuildContext context) => Text(
+        "You have updated your password.\nNow navigate back to sign in screen.",
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          fontSize: UIHelper.getDynamicFontSize(context, UIHelper.fontSize16),
+          color: UIHelper.blackOut,
+          fontWeight: FontWeight.w500,
+        ),
+      );
+
+  Text _congratsText(BuildContext context) => Text(
+        "Congrats!",
+        style: TextStyle(
+          fontSize: UIHelper.getDynamicFontSize(context, UIHelper.fontSize28),
+          fontWeight: FontWeight.bold,
+          color: UIHelper.black,
+        ),
+      );
 }
