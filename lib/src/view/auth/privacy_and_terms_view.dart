@@ -66,6 +66,7 @@ class PrivacyAndTermsView extends StatelessWidget {
           SharedButtonWithIcon(
             title: "Terms of Service",
             isSettings: false,
+            isElevationOn: true,
             onPressed: () async {
               await showDialog(
                 context: context,
@@ -77,6 +78,7 @@ class PrivacyAndTermsView extends StatelessWidget {
           SharedButtonWithIcon(
             title: "Privacy Policy",
             isSettings: false,
+            isElevationOn: true,
             onPressed: () async {
               await showDialog(
                 context: context,
