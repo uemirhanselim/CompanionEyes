@@ -66,15 +66,67 @@ class PrivacyAndTermsView extends StatelessWidget {
           SharedButtonWithIcon(
             title: "Terms of Service",
             isSettings: false,
-            onPressed: () {},
+            isElevationOn: true,
+            onPressed: () async {
+              await showDialog(
+                context: context,
+                builder: (context) => _dialog(context, isTerms: true),
+              );
+            },
           ),
           UIHelper.emptySpaceHeight(context, 0.02),
           SharedButtonWithIcon(
             title: "Privacy Policy",
             isSettings: false,
-            onPressed: () {},
+            isElevationOn: true,
+            onPressed: () async {
+              await showDialog(
+                context: context,
+                builder: (context) => _dialog(context, isTerms: false),
+              );
+            },
           ),
         ],
+      );
+
+  Dialog _dialog(BuildContext context, {required bool isTerms}) => Dialog(
+        insetPadding: UIHelper.pagePadding(context) +
+            EdgeInsets.only(top: UIHelper.getDynamicHeight(context, 0.07)),
+        alignment: Alignment.topCenter,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: SizedBox(
+          height: UIHelper.getDynamicHeight(context, 0.7),
+          width: UIHelper.getDynamicWidth(context, 1),
+          child: Padding(
+            padding: EdgeInsets.all(
+              UIHelper.getDynamicHeight(context, 0.02),
+            ),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    isTerms ? "Terms of Service" : "Privacy Policy",
+                    style: TextStyle(
+                        fontSize: UIHelper.getDynamicFontSize(
+                            context, UIHelper.fontSize22),
+                        fontWeight: FontWeight.w600),
+                  ),
+                  UIHelper.emptySpaceHeight(context, 0.02),
+                  Text(
+                    "example text",
+                    style: TextStyle(
+                        fontSize: UIHelper.getDynamicFontSize(
+                            context, UIHelper.fontSize14),
+                        fontWeight: FontWeight.w400),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
       );
 
   Widget _infoPart(BuildContext context) => Column(

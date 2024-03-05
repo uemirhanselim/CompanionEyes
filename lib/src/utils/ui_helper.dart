@@ -22,9 +22,12 @@ class UIHelper {
   static const Color formalGrey = Color(0xff97979A);
   static const Color plaster = Color(0xffEAE9EA);
   static const Color aluminumSilver = Color(0xff8E8D92);
+  static const Color tomatoFrog = Color(0xFFF94545);
 
+  static const double fontSize11 = 0.0137;
   static const double fontSize12 = 0.0149;
   static const double fontSize14 = 0.0174;
+  static const double fontSize15 = 0.0186;
   static const double fontSize16 = 0.0199;
   static const double fontSize20 = 0.0248;
   static const double fontSize22 = 0.0273;
