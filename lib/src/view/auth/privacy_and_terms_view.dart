@@ -3,9 +3,7 @@ import 'package:companioneyes/src/view/widgets/back_app_bar.dart';
 import 'package:companioneyes/src/view/widgets/shared_button.dart';
 import 'package:companioneyes/src/view/widgets/shared_button_with_icon.dart';
 import 'package:companioneyes/src/viewmodel/auth/privacy_and_terms_viewmodel.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
 class PrivacyAndTermsView extends StatelessWidget {
