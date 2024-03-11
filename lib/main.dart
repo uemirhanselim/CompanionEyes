@@ -9,6 +9,7 @@ import 'package:companioneyes/src/view/auth/register_view.dart';
 import 'package:companioneyes/src/view/home/home_view.dart';
 import 'package:companioneyes/src/view/opening/opening_view.dart';
 import 'package:companioneyes/src/view/splash/splash_view.dart';
+import 'package:companioneyes/src/view/support/faq_view.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'firebase_options.dart';
@@ -39,7 +40,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: GoogleFonts.montserrat().fontFamily,
       ),
-      home: const HomeView(),
+      home: const FaqView(),
     );
   }
 }
