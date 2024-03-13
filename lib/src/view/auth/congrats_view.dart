@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:companioneyes/src/package/svg_image.dart';
 import 'package:companioneyes/src/utils/ui_helper.dart';
 import 'package:companioneyes/src/view/widgets/shared_button.dart';
@@ -5,6 +6,7 @@ import 'package:companioneyes/src/viewmodel/auth/congrats_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+@RoutePage()
 class CongratsView extends StatelessWidget {
   const CongratsView({super.key});
   @override
@@ -24,7 +26,7 @@ class CongratsView extends StatelessWidget {
                 UIHelper.emptySpaceHeight(context, 0.02),
                 _definitionText(context),
                 const Spacer(),
-                _button(),
+                _button(context),
                 UIHelper.emptySpaceHeight(context, 0.04),
               ],
             ),
@@ -38,10 +40,10 @@ class CongratsView extends StatelessWidget {
         assetName: UIHelper.successfulSvg,
       );
 
-  SharedButton _button() => SharedButton(
+  SharedButton _button(BuildContext context) => SharedButton(
         title: "Go to Sign In",
         color: UIHelper.black,
-        onPressed: () {},
+        onPressed: () => context.router,
       );
 
   Text _definitionText(BuildContext context) => Text(
