@@ -33,6 +33,7 @@ class UIHelper {
   static const double fontSize22 = 0.0273;
   static const double fontSize28 = 0.0357;
   static const double fontSize32 = 0.0398;
+  static const double fontSize38 = 0.0458;
 
   static EdgeInsets pagePadding(BuildContext context) => EdgeInsets.symmetric(
         horizontal: getDynamicWidth(context, 0.04),

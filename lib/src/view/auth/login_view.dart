@@ -1,5 +1,6 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:companioneyes/src/routes/app_router.dart';
 import 'package:companioneyes/src/utils/ui_helper.dart';
-import 'package:companioneyes/src/view/auth/register_view.dart';
 import 'package:companioneyes/src/view/widgets/back_app_bar.dart';
 import 'package:companioneyes/src/view/widgets/shared_button.dart';
 import 'package:companioneyes/src/view/widgets/shared_phone_number_text_field.dart';
@@ -9,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:provider/provider.dart';
 
+@RoutePage()
 class LoginView extends StatelessWidget {
   const LoginView({super.key});
   @override
@@ -30,7 +32,7 @@ class LoginView extends StatelessWidget {
                       UIHelper.emptySpaceHeight(context, 0.05),
                       _fields(viewModel, context),
                       UIHelper.emptySpaceHeight(context, 0.06),
-                      _buttons(context),
+                      _buttons(context, viewModel),
                     ],
                   ),
                 ),
@@ -42,18 +44,20 @@ class LoginView extends StatelessWidget {
     );
   }
 
-  Column _buttons(BuildContext context) => Column(
+  Column _buttons(BuildContext context, LoginViewModel viewModel) => Column(
         children: [
           SharedButton(
             color: UIHelper.black,
             title: "Next",
-            onPressed: () {},
+            onPressed: !viewModel.isNextButtonActive
+                ? () => context.router.push(const HomeRoute())
+                : null,
           ),
           UIHelper.emptySpaceHeight(context, 0.032),
           SharedButton(
             color: UIHelper.saltwaterDenim,
             title: "Forgot Password?",
-            onPressed: () {},
+            onPressed: () => context.router.push(const ForgotPasswordRoute()),
           ),
           UIHelper.emptySpaceHeight(context, 0.04),
         ],
@@ -61,12 +65,10 @@ class LoginView extends StatelessWidget {
 
   Column _fields(LoginViewModel viewModel, BuildContext context) => Column(
         children: [
-          SharedPhoneNumberTextField(
-            focusNode: viewModel.phoneNumberFocusNode,
-            onInputChanged: (PhoneNumber phoneNumber) {
-              viewModel.phoneNumberController.text = phoneNumber.phoneNumber!;
-            },
-          ),
+          SharedTextFormField(
+              title: "Email",
+              controller: viewModel.emailController,
+              focusNode: viewModel.emailFocusNode),
           UIHelper.emptySpaceHeight(context, 0.02),
           SharedTextFormField(
             title: "Password",

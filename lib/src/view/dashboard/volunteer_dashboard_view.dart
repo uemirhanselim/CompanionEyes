@@ -1,8 +1,11 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:companioneyes/src/routes/app_router.dart';
 import 'package:companioneyes/src/utils/ui_helper.dart';
 import 'package:companioneyes/src/viewmodel/dashboard/volunteer_dashboard_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+@RoutePage()
 class VolunteerDashboardView extends StatelessWidget {
   const VolunteerDashboardView({super.key});
   @override
@@ -19,7 +22,7 @@ class VolunteerDashboardView extends StatelessWidget {
                 _image(context),
                 _card(context, _personalData(context)),
                 UIHelper.emptySpaceHeight(context, 0.02),
-                _card(context, _answerCallText(context), isSmall: true),
+                _answerCallButton(context),
                 UIHelper.emptySpaceHeight(context, 0.02),
                 _card(
                   context,
@@ -33,18 +36,18 @@ class VolunteerDashboardView extends StatelessWidget {
     );
   }
 
-  Text _answerCallText(BuildContext context) {
-    return _text(
-        context, "Learn to answer a call", UIHelper.fontSize15, UIHelper.white);
-  }
+  TextButton _answerCallButton(BuildContext context) => TextButton(
+      onPressed: () => context.router.push(const TestCallRoute()),
+      child: _card(context, _answerCallText(context), isSmall: true));
 
-  Text _notificationText(BuildContext context) {
-    return _text(
-        context,
-        "You will recieve a notification when someone needs your help.",
-        UIHelper.fontSize15,
-        UIHelper.blackOut);
-  }
+  Text _answerCallText(BuildContext context) => _text(
+      context, "Learn to answer a call", UIHelper.fontSize15, UIHelper.white);
+
+  Text _notificationText(BuildContext context) => _text(
+      context,
+      "You will recieve a notification when someone needs your help.",
+      UIHelper.fontSize15,
+      UIHelper.blackOut);
 
   Image _image(BuildContext context) => Image.asset(
         UIHelper.appLogoIcon,

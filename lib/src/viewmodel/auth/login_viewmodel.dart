@@ -5,14 +5,18 @@ class LoginViewModel extends ChangeNotifier {
 // Add your initialization code here
   }
 // Setters
-  final TextEditingController _phoneNumberController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final FocusNode _phoneNumberFocusNode = FocusNode();
+  final FocusNode _emailFocusNode = FocusNode();
   final FocusNode _passwordFocusNode = FocusNode();
 // Getters
-  TextEditingController get phoneNumberController => _phoneNumberController;
+  TextEditingController get emailController => _emailController;
   TextEditingController get passwordController => _passwordController;
-  FocusNode get phoneNumberFocusNode => _phoneNumberFocusNode;
+  FocusNode get emailFocusNode => _emailFocusNode;
   FocusNode get passwordFocusNode => _passwordFocusNode;
 // Other methods
+
+bool get isNextButtonActive =>
+      _emailController.text.isNotEmpty &&
+      _passwordController.text.isNotEmpty;
 }

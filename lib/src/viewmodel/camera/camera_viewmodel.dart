@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-
-class SplashViewModel extends ChangeNotifier {
-  SplashViewModel() {
+class CameraViewModel extends ChangeNotifier {
+CameraViewModel() {
 // Add your initialization code here
-  
-  }
+}
 // Setters
 // Getters
 // Other methods

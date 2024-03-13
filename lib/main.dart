@@ -1,14 +1,5 @@
 import 'package:companioneyes/src/local/user_status_database.dart';
-import 'package:companioneyes/src/view/auth/code_view.dart';
-import 'package:companioneyes/src/view/auth/congrats_view.dart';
-import 'package:companioneyes/src/view/auth/device_access_view.dart';
-import 'package:companioneyes/src/view/auth/forgot_password_view.dart';
-import 'package:companioneyes/src/view/auth/login_view.dart';
-import 'package:companioneyes/src/view/auth/privacy_and_terms_view.dart';
-import 'package:companioneyes/src/view/auth/register_view.dart';
-import 'package:companioneyes/src/view/home/home_view.dart';
-import 'package:companioneyes/src/view/opening/opening_view.dart';
-import 'package:companioneyes/src/view/splash/splash_view.dart';
+import 'package:companioneyes/src/routes/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'firebase_options.dart';
@@ -25,21 +16,23 @@ void main() async {
   // Local database initialization
   await UserStatusDatabase.initialize();
 
-  runApp(const MyApp());
+  runApp( MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+
+  final _appRouter = AppRouter();
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Companion Eyes',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: GoogleFonts.montserrat().fontFamily,
       ),
-      home: const HomeView(),
+    routerConfig: _appRouter.config(), 
     );
   }
 }

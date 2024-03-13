@@ -1,9 +1,12 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:companioneyes/src/routes/app_router.dart';
 import 'package:companioneyes/src/utils/ui_helper.dart';
 import 'package:companioneyes/src/view/widgets/shared_button.dart';
 import 'package:companioneyes/src/viewmodel/auth/device_access_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+@RoutePage()
 class DeviceAccessView extends StatelessWidget {
   const DeviceAccessView({super.key});
   @override
@@ -23,7 +26,7 @@ class DeviceAccessView extends StatelessWidget {
                 UIHelper.emptySpaceHeight(context, 0.02),
                 _definitionText(context),
                 const Spacer(),
-                _button(),
+                _button(context),
                 UIHelper.emptySpaceHeight(context, 0.04),
               ],
             ),
@@ -37,10 +40,10 @@ class DeviceAccessView extends StatelessWidget {
         UIHelper.deviceAccessImage,
       );
 
-  SharedButton _button() => SharedButton(
+  SharedButton _button(BuildContext context) => SharedButton(
         title: "Give Access",
         color: UIHelper.black,
-        onPressed: () {},
+        onPressed: () => context.router.replaceAll([const HomeRoute()]),
       );
 
   Text _definitionText(BuildContext context) => Text(

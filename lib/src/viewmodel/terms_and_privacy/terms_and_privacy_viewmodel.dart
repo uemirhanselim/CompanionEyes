@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
-class SplashViewModel extends ChangeNotifier {
-  SplashViewModel() {
+class TermsAndPrivacyViewModel extends ChangeNotifier {
+  TermsAndPrivacyViewModel() {
 // Add your initialization code here
-  
   }
 // Setters
 // Getters

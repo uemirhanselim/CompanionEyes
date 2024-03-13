@@ -10,7 +10,7 @@ class SharedButton extends StatelessWidget {
   });
   final String title;
   final Color color;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   @override
   Widget build(BuildContext context) {
     return SizedBox(

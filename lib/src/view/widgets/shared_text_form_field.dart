@@ -52,6 +52,7 @@ class _SharedTextFormFieldState extends State<SharedTextFormField> {
           child: TextFormField(
             controller: widget.controller,
             focusNode: widget.focusNode,
+            maxLines: widget.title == "Description" ? 5 : 1,
             obscureText: widget.title.contains("Password") ? _isObscure : false,
             keyboardType: TextInputType.text,
             decoration: InputDecoration(
