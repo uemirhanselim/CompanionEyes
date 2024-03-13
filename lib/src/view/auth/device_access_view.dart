@@ -43,7 +43,7 @@ class DeviceAccessView extends StatelessWidget {
   SharedButton _button(BuildContext context) => SharedButton(
         title: "Give Access",
         color: UIHelper.black,
-        onPressed: () => context.router.push(const HomeRoute()),
+        onPressed: () => context.router.replaceAll([const HomeRoute()]),
       );
 
   Text _definitionText(BuildContext context) => Text(
