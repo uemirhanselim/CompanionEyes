@@ -1,10 +1,12 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:companioneyes/src/routes/app_router.dart';
 import 'package:companioneyes/src/utils/ui_helper.dart';
 import 'package:companioneyes/src/view/widgets/shared_button_with_icon.dart';
 import 'package:companioneyes/src/viewmodel/settings/settings_viewmodel.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
+@RoutePage()
 class SettingsView extends StatelessWidget {
   const SettingsView({super.key});
   @override
@@ -54,13 +56,13 @@ class SettingsView extends StatelessWidget {
           SharedButtonWithIcon(
             title: "Personal Details",
             isSettings: false,
-            onPressed: () {},
+            onPressed: () => context.router.push(const EditProfileRoute()),
           ),
           UIHelper.emptySpaceHeight(context, 0.012),
           SharedButtonWithIcon(
             title: "Change Password",
             isSettings: false,
-            onPressed: () {},
+            onPressed: () => context.router.push(const ChangePasswordRoute()),
           ),
           UIHelper.emptySpaceHeight(context, 0.012),
           SharedButtonWithIcon(
@@ -102,21 +104,21 @@ class SettingsView extends StatelessWidget {
             title: "FAQ",
             isSettings: true,
             iconPath: UIHelper.questionMarkIcon,
-            onPressed: () {},
+            onPressed: () => context.router.push(const FaqRoute()),
           ),
           UIHelper.emptySpaceHeight(context, 0.012),
           SharedButtonWithIcon(
             title: "Send us Feedback",
             isSettings: true,
             iconPath: UIHelper.warningDialogIcon,
-            onPressed: () {},
+            onPressed: () => context.router.push(const FeedbackRoute()),
           ),
           UIHelper.emptySpaceHeight(context, 0.012),
           SharedButtonWithIcon(
             title: "Terms & Privacy Policy",
             isSettings: true,
             iconPath: UIHelper.shieldIcon,
-            onPressed: () {},
+            onPressed: () => context.router.push(const TermsAndPrivacyRoute()),
           ),
         ],
       );
@@ -165,7 +167,7 @@ class SettingsView extends StatelessWidget {
                 backgroundColor: UIHelper.plaster,
                 elevation: 0,
               ),
-              onPressed: () {},
+              onPressed: () => context.router.push(const LanguageEditRoute()),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
