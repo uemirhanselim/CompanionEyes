@@ -1,3 +1,5 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:companioneyes/src/routes/app_router.dart';
 import 'package:companioneyes/src/utils/ui_helper.dart';
 import 'package:companioneyes/src/view/widgets/back_app_bar.dart';
 import 'package:companioneyes/src/view/widgets/shared_button.dart';
@@ -7,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:provider/provider.dart';
 
+@RoutePage()
 class CodeView extends StatelessWidget {
   const CodeView({super.key});
   @override
@@ -29,7 +32,7 @@ class CodeView extends StatelessWidget {
                 UIHelper.emptySpaceHeight(context, 0.03),
                 _contactUs(context),
                 const Spacer(),
-                _button(),
+                _button(context),
                 UIHelper.emptySpaceHeight(context, 0.04),
               ],
             ),
@@ -39,10 +42,10 @@ class CodeView extends StatelessWidget {
     );
   }
 
-  SharedButton _button() => SharedButton(
+  SharedButton _button(BuildContext context) => SharedButton(
         title: "Next",
         color: UIHelper.black,
-        onPressed: () {},
+        onPressed: () => context.router.push(const CongratsRoute()),
       );
 
   Widget _contactUs(BuildContext context) => RichText(
