@@ -49,7 +49,7 @@ class LoginView extends StatelessWidget {
           SharedButton(
             color: UIHelper.black,
             title: "Next",
-            onPressed: viewModel.isNextButtonActive
+            onPressed: !viewModel.isNextButtonActive
                 ? () => context.router.push(const HomeRoute())
                 : null,
           ),
@@ -65,12 +65,10 @@ class LoginView extends StatelessWidget {
 
   Column _fields(LoginViewModel viewModel, BuildContext context) => Column(
         children: [
-          SharedPhoneNumberTextField(
-            focusNode: viewModel.phoneNumberFocusNode,
-            onInputChanged: (PhoneNumber phoneNumber) {
-              viewModel.phoneNumberController.text = phoneNumber.phoneNumber!;
-            },
-          ),
+          SharedTextFormField(
+              title: "Email",
+              controller: viewModel.emailController,
+              focusNode: viewModel.emailFocusNode),
           UIHelper.emptySpaceHeight(context, 0.02),
           SharedTextFormField(
             title: "Password",
