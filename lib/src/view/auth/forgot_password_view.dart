@@ -53,14 +53,12 @@ create: (_) {
             try {
               await FirebaseAuth.instance.sendPasswordResetEmail(
                   email: viewModel.emailController.text.trim());
-              // Şifre sıfırlama e-postası başarıyla gönderildi
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
                   content: Text('Password reset email sent successfully'),
                 ),
               );
             } catch (e) {
-              // Şifre sıfırlama e-postası gönderilirken bir hata oluştu
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text('Failed to send password reset email: $e'),

@@ -52,7 +52,6 @@ class RegisterView extends StatelessWidget {
             title: "Next",
             onPressed: () async {
               if (viewModel.isNextButtonActive) {
-                // Firebase'e kayıt ol
                 try {
                   UserCredential userCredential = await FirebaseAuth
                       .instance
@@ -60,8 +59,6 @@ class RegisterView extends StatelessWidget {
                     email: viewModel.emailController.text.trim(),
                     password: viewModel.passwordController.text,
                   );
-
-                  // Save user data to Firestore
                   await FirebaseFirestore.instance.collection('users').doc(userCredential.user!.uid).set({
                     'firstName': viewModel.firstNameController.text,
                     'lastName': viewModel.lastNameController.text,
@@ -69,13 +66,10 @@ class RegisterView extends StatelessWidget {
                     'gender': viewModel.selectedGender,
                     'language': viewModel.selectedLanguage,
                   });
-
-                  // Kayıt başarılı olduğunda bir sonraki sayfaya yönlendir
                   context.router.push(const PrivacyAndTermsRoute());
                 } catch (e) {
-                  // Kayıt sırasında bir hata oluşursa kullanıcıya bildir
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text("Kayıt başarısız oldu: $e")),
+                    SnackBar(content: Text("Registration failed: $e")),
                   );
                 }
               }

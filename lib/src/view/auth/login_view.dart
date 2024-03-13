@@ -52,18 +52,15 @@ class LoginView extends StatelessWidget {
             title: "Next",
             onPressed: () async {
               if (viewModel.isNextButtonActive) {
-                // Firebase'e giriş yap
                 try {
                   await FirebaseAuth.instance.signInWithEmailAndPassword(
                     email: viewModel.emailController.text.trim(),
                     password: viewModel.passwordController.text,
                   );
-                  // Başarılı girişten sonra bir sonraki sayfaya yönlendir
                   context.router.push(const HomeRoute());
                 } catch (e) {
-                  // Giriş sırasında bir hata oluşursa kullanıcıya bildir
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text("Giriş başarısız oldu: $e")),
+                    SnackBar(content: Text("The login failed: $e")),
                   );
                 }
               }
