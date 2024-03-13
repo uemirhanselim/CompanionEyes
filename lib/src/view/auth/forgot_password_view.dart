@@ -1,5 +1,6 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:companioneyes/src/routes/app_router.dart';
 import 'package:companioneyes/src/utils/ui_helper.dart';
-import 'package:companioneyes/src/view/auth/register_view.dart';
 import 'package:companioneyes/src/view/widgets/back_app_bar.dart';
 import 'package:companioneyes/src/view/widgets/shared_button.dart';
 import 'package:companioneyes/src/view/widgets/shared_phone_number_text_field.dart';
@@ -8,6 +9,7 @@ import 'package:companioneyes/src/viewmodel/auth/forgot_password_viewmodel.dart'
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+@RoutePage()
 class ForgotPasswordView extends StatelessWidget {
   const ForgotPasswordView({super.key});
   @override
@@ -35,11 +37,16 @@ class ForgotPasswordView extends StatelessWidget {
     );
   }
 
-  Widget get _button => SharedButton(
-        color: UIHelper.black,
-        title: "Next",
-        onPressed: () {},
-      );
+  Widget get _button =>
+      Consumer<ForgotPasswordViewModel>(builder: (context, viewModel, _) {
+        return SharedButton(
+          color: UIHelper.black,
+          title: "Next",
+          onPressed: viewModel.isNextButtonActive
+              ? () => context.router.push(const CodeRoute())
+              : null,
+        );
+      });
 
   Widget _fields(BuildContext context) => Consumer<ForgotPasswordViewModel>(
         builder: (context, viewModel, _) {
