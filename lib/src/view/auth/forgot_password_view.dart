@@ -18,19 +18,21 @@ class ForgotPasswordView extends StatelessWidget {
       create: (_) => ForgotPasswordViewModel(),
       child: Scaffold(
         appBar: const BackAppBar(),
-        body: Padding(
-          padding: UIHelper.pagePadding(context),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              UIHelper.emptySpaceHeight(context, 0.02),
-              _headlineText(context),
-              UIHelper.emptySpaceHeight(context, 0.05),
-              _fields(context),
-              const Spacer(),
-              _button,
-              UIHelper.emptySpaceHeight(context, 0.04),
-            ],
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: UIHelper.pagePadding(context),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                UIHelper.emptySpaceHeight(context, 0.02),
+                _headlineText(context),
+                UIHelper.emptySpaceHeight(context, 0.05),
+                _fields(context),
+                UIHelper.emptySpaceHeight(context, 0.3),
+                _button,
+                UIHelper.emptySpaceHeight(context, 0.04),
+              ],
+            ),
           ),
         ),
       ),
@@ -42,7 +44,7 @@ class ForgotPasswordView extends StatelessWidget {
         return SharedButton(
           color: UIHelper.black,
           title: "Next",
-          onPressed: viewModel.isNextButtonActive
+          onPressed: !viewModel.isNextButtonActive
               ? () => context.router.push(const CodeRoute())
               : null,
         );
@@ -54,7 +56,9 @@ class ForgotPasswordView extends StatelessWidget {
             children: <Widget>[
               SharedPhoneNumberTextField(
                 focusNode: viewModel.phoneNumberFocusNode,
-                onInputChanged: (p0) {},
+                onInputChanged: (p0) {
+                  viewModel.setPhoneNumber = p0.phoneNumber!;
+                },
               ),
               UIHelper.emptySpaceHeight(context, 0.02),
               SharedTextFormField(
