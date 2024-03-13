@@ -44,4 +44,17 @@ class RegisterViewModel extends ChangeNotifier {
     _selectedLanguage = value;
     notifyListeners();
   }
+
+  bool get isNextButtonActive {
+    if (_firstNameController.text.isNotEmpty &&
+        _lastNameController.text.isNotEmpty &&
+        _phoneNumberController.text.isNotEmpty &&
+        _passwordController.text.isNotEmpty &&
+        _selectedGender != null &&
+        _selectedLanguage != null) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
