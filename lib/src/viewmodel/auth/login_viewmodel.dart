@@ -15,4 +15,8 @@ class LoginViewModel extends ChangeNotifier {
   FocusNode get phoneNumberFocusNode => _phoneNumberFocusNode;
   FocusNode get passwordFocusNode => _passwordFocusNode;
 // Other methods
+
+bool get isNextButtonActive =>
+      _phoneNumberController.text.isNotEmpty &&
+      _passwordController.text.isNotEmpty;
 }
