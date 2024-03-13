@@ -22,6 +22,11 @@ class ForgotPasswordViewModel extends ChangeNotifier {
   FocusNode get confirmPasswordFocusNode => _confirmPasswordFocusNode;
 // Other methods
 
+set setPhoneNumber(String phoneNumber) {
+    _phoneNumberController.text = phoneNumber;
+    notifyListeners();
+  }
+
   bool get isNextButtonActive =>
       _phoneNumberController.text.isNotEmpty &&
       _newPasswordController.text.isNotEmpty &&
