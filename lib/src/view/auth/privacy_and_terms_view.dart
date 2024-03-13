@@ -1,3 +1,5 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:companioneyes/src/routes/app_router.dart';
 import 'package:companioneyes/src/utils/ui_helper.dart';
 import 'package:companioneyes/src/view/widgets/back_app_bar.dart';
 import 'package:companioneyes/src/view/widgets/shared_button.dart';
@@ -6,6 +8,7 @@ import 'package:companioneyes/src/viewmodel/auth/privacy_and_terms_viewmodel.dar
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+@RoutePage()
 class PrivacyAndTermsView extends StatelessWidget {
   const PrivacyAndTermsView({super.key});
   @override
@@ -53,7 +56,7 @@ class PrivacyAndTermsView extends StatelessWidget {
           SharedButton(
             title: "I agree",
             color: UIHelper.black,
-            onPressed: () {},
+            onPressed: () => context.router.push(const DeviceAccessRoute()),
           ),
           UIHelper.emptySpaceHeight(context, 0.04),
         ],
