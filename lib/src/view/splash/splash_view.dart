@@ -1,8 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:companioneyes/src/utils/ui_helper.dart';
 import 'package:companioneyes/src/viewmodel/splash/splash_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+@RoutePage() 
 class SplashView extends StatelessWidget {
   const SplashView({super.key});
   @override
@@ -11,16 +13,14 @@ class SplashView extends StatelessWidget {
       create: (_) => SplashViewModel(),
       child: Scaffold(
         backgroundColor: UIHelper.saltwaterDenim,
-        body: _centerWidget(),
+        body: _centerWidget,
       ),
     );
   }
 
-  Center _centerWidget() {
-    return Center(
-      child: _appLogo(),
-    );
-  }
+  Center get _centerWidget => Center(
+        child: _appLogo,
+      );
 
-  Image _appLogo() => Image.asset(UIHelper.appLogoIcon);
+  Image get _appLogo => Image.asset(UIHelper.appLogoIcon);
 }
