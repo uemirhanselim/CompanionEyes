@@ -8,11 +8,11 @@ class RegisterViewModel extends ChangeNotifier {
 // Setters
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
-  final TextEditingController _phoneNumberController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final FocusNode _firstNameFocusNode = FocusNode();
   final FocusNode _lastNameFocusNode = FocusNode();
-  final FocusNode _phoneNumberFocusNode = FocusNode();
+  final FocusNode _emailFocusNode = FocusNode();
   final FocusNode _passwordFocusNode = FocusNode();
   final List<String> _genders = ["Male", "Female", "Other"];
   final List<String> _languages = ["English", "Turkish"];
@@ -22,11 +22,11 @@ class RegisterViewModel extends ChangeNotifier {
 // Getters
   TextEditingController get firstNameController => _firstNameController;
   TextEditingController get lastNameController => _lastNameController;
-  TextEditingController get phoneNumberController => _phoneNumberController;
+  TextEditingController get emailController => _emailController;
   TextEditingController get passwordController => _passwordController;
   FocusNode get firstNameFocusNode => _firstNameFocusNode;
   FocusNode get lastNameFocusNode => _lastNameFocusNode;
-  FocusNode get phoneNumberFocusNode => _phoneNumberFocusNode;
+  FocusNode get emailFocusNode => _emailFocusNode;
   FocusNode get passwordFocusNode => _passwordFocusNode;
   List<String> get genders => _genders;
   List<String> get languages => _languages;
@@ -48,7 +48,7 @@ class RegisterViewModel extends ChangeNotifier {
   bool get isNextButtonActive {
     if (_firstNameController.text.isNotEmpty &&
         _lastNameController.text.isNotEmpty &&
-        _phoneNumberController.text.isNotEmpty &&
+        _emailController.text.isNotEmpty &&
         _passwordController.text.isNotEmpty &&
         _selectedGender != null &&
         _selectedLanguage != null) {
