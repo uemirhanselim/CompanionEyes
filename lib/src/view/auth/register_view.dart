@@ -1,17 +1,16 @@
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:companioneyes/src/routes/app_router.dart';
 import 'package:companioneyes/src/utils/ui_helper.dart';
-import 'package:companioneyes/src/view/widgets/back_app_bar.dart';
 import 'package:companioneyes/src/view/widgets/shared_button.dart';
 import 'package:companioneyes/src/view/widgets/shared_phone_number_text_field.dart';
 import 'package:companioneyes/src/view/widgets/shared_text_form_field.dart';
 import 'package:companioneyes/src/viewmodel/auth/register_viewmodel.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:provider/provider.dart';
 
+@RoutePage()
 class RegisterView extends StatelessWidget {
   const RegisterView({super.key});
   @override
@@ -19,7 +18,6 @@ class RegisterView extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (_) => RegisterViewModel(),
       child: Scaffold(
-        appBar: const BackAppBar(),
         body: Consumer<RegisterViewModel>(builder: (context, viewModel, _) {
           return SingleChildScrollView(
             child: Align(
@@ -32,7 +30,7 @@ class RegisterView extends StatelessWidget {
                     UIHelper.emptySpaceHeight(context, 0.05),
                     _fields(viewModel, context),
                     UIHelper.emptySpaceHeight(context, 0.06),
-                    _buttons(context),
+                    _buttons(context, viewModel),
                   ],
                 ),
               ),
@@ -43,12 +41,14 @@ class RegisterView extends StatelessWidget {
     );
   }
 
-  Column _buttons(BuildContext context) => Column(
+  Column _buttons(BuildContext context, RegisterViewModel viewModel) => Column(
         children: [
           SharedButton(
             color: UIHelper.black,
             title: "Next",
-            onPressed: () {},
+            onPressed: viewModel.isNextButtonActive
+                ? () => context.router.push(const PrivacyAndTermsRoute())
+                : null,
           ),
           UIHelper.emptySpaceHeight(context, 0.01),
           _alreadyAUser(context),
@@ -56,7 +56,7 @@ class RegisterView extends StatelessWidget {
           SharedButton(
             color: UIHelper.saltwaterDenim,
             title: "Sign in",
-            onPressed: () {},
+            onPressed: () => context.router.push(const LoginRoute()),
           ),
           UIHelper.emptySpaceHeight(context, 0.04),
         ],
@@ -169,4 +169,3 @@ class RegisterView extends StatelessWidget {
         ),
       );
 }
-
