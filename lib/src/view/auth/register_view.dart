@@ -2,6 +2,7 @@ import 'package:animated_custom_dropdown/custom_dropdown.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:companioneyes/src/routes/app_router.dart';
 import 'package:companioneyes/src/utils/ui_helper.dart';
+import 'package:companioneyes/src/view/widgets/back_app_bar.dart';
 import 'package:companioneyes/src/view/widgets/shared_button.dart';
 import 'package:companioneyes/src/view/widgets/shared_phone_number_text_field.dart';
 import 'package:companioneyes/src/view/widgets/shared_text_form_field.dart';
@@ -18,6 +19,7 @@ class RegisterView extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (_) => RegisterViewModel(),
       child: Scaffold(
+        appBar: const BackAppBar(),
         body: Consumer<RegisterViewModel>(builder: (context, viewModel, _) {
           return SingleChildScrollView(
             child: Align(
@@ -46,7 +48,7 @@ class RegisterView extends StatelessWidget {
           SharedButton(
             color: UIHelper.black,
             title: "Next",
-            onPressed: viewModel.isNextButtonActive
+            onPressed: !viewModel.isNextButtonActive
                 ? () => context.router.push(const PrivacyAndTermsRoute())
                 : null,
           ),
@@ -96,12 +98,10 @@ class RegisterView extends StatelessWidget {
             ],
           ),
           UIHelper.emptySpaceHeight(context, 0.02),
-          SharedPhoneNumberTextField(
-            focusNode: viewModel.phoneNumberFocusNode,
-            onInputChanged: (PhoneNumber phoneNumber) {
-              viewModel.phoneNumberController.text = phoneNumber.phoneNumber!;
-            },
-          ),
+          SharedTextFormField(
+              title: "Email",
+              controller: viewModel.emailController,
+              focusNode: viewModel.emailFocusNode),
           UIHelper.emptySpaceHeight(context, 0.02),
           _dropDownField(context, viewModel, "Gender"),
           UIHelper.emptySpaceHeight(context, 0.02),
