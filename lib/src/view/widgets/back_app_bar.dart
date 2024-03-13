@@ -1,4 +1,4 @@
-import 'package:companioneyes/src/utils/navigation_helper.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:companioneyes/src/utils/ui_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -20,7 +20,7 @@ class BackAppBar extends StatelessWidget implements PreferredSizeWidget {
       leadingWidth: 18,
       leading: IconButton(
         icon: const Icon(Icons.chevron_left),
-        onPressed: () => NavigationHelper.pop(context),
+        onPressed: () => context.router.pop(),
       ),
     );
   }
