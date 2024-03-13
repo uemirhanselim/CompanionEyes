@@ -1,9 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:companioneyes/src/utils/ui_helper.dart';
 import 'package:companioneyes/src/view/widgets/back_app_bar.dart';
 import 'package:companioneyes/src/viewmodel/profile/language_edit_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+@RoutePage()
 class LanguageEditView extends StatelessWidget {
   const LanguageEditView({super.key});
   @override
