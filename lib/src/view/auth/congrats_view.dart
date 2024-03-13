@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:companioneyes/src/package/svg_image.dart';
+import 'package:companioneyes/src/routes/app_router.dart';
 import 'package:companioneyes/src/utils/ui_helper.dart';
 import 'package:companioneyes/src/view/widgets/shared_button.dart';
 import 'package:companioneyes/src/viewmodel/auth/congrats_viewmodel.dart';
@@ -43,7 +44,7 @@ class CongratsView extends StatelessWidget {
   SharedButton _button(BuildContext context) => SharedButton(
         title: "Go to Sign In",
         color: UIHelper.black,
-        onPressed: () => context.router,
+        onPressed: () => context.router.replaceAll([const HomeRoute()]),
       );
 
   Text _definitionText(BuildContext context) => Text(
