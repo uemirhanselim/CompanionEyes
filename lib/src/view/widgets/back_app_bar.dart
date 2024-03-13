@@ -8,19 +8,19 @@ class BackAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-      title: Text(
-        "Back",
-        style: GoogleFonts.montserrat(
-          fontSize: UIHelper.getDynamicFontSize(context, UIHelper.fontSize20),
-          color: UIHelper.black,
-          fontWeight: FontWeight.w500,
+    return TextButton(
+      onPressed: () => context.router.pop(),
+      child: AppBar(
+        title: Text(
+          "Back",
+          style: GoogleFonts.montserrat(
+            fontSize: UIHelper.getDynamicFontSize(context, UIHelper.fontSize20),
+            color: UIHelper.black,
+            fontWeight: FontWeight.w500,
+          ),
         ),
-      ),
-      leadingWidth: 18,
-      leading: IconButton(
-        icon: const Icon(Icons.chevron_left),
-        onPressed: () => context.router.pop(),
+        leadingWidth: 18,
+        leading: const Icon(Icons.chevron_left),
       ),
     );
   }
