@@ -28,62 +28,32 @@ class AppRouter extends _$AppRouter {
   @override
   List<AutoRoute> get routes => [
         AutoRoute(page: SplashRoute.page),
-        AutoRoute(page: OpeningRoute.page),
+        AutoRoute(page: OpeningRoute.page, initial: true),
         AutoRoute(page: PrivacyAndTermsRoute.page),
         AutoRoute(page: RegisterRoute.page),
-        AutoRoute(page: LoginRoute.page, initial: true, children: [
-          AutoRoute(
-            page: ForgotPasswordRoute.page,
-            children: [
-              AutoRoute(
-                page: CodeRoute.page,
-                children: [
-                  AutoRoute(
-                    page: CongratsRoute.page,
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ]),
+        AutoRoute(page: LoginRoute.page),
+        AutoRoute(page: ForgotPasswordRoute.page),
         AutoRoute(page: CodeRoute.page),
         AutoRoute(page: DeviceAccessRoute.page),
         AutoRoute(page: CongratsRoute.page),
         AutoRoute(page: CodeRoute.page),
+        AutoRoute(page: EditProfileRoute.page),
+        AutoRoute(page: LanguageEditRoute.page),
+        AutoRoute(page: FaqRoute.page),
+        AutoRoute(page: FeedbackRoute.page),
+        AutoRoute(page: TermsAndPrivacyRoute.page),
+        AutoRoute(page: ChangePasswordRoute.page),
+        AutoRoute(page: TestCallRoute.page),
         AutoRoute(
           page: HomeRoute.page,
-          initial: false,
           children: [
             AutoRoute(page: ImpairedDashboardRoute.page),
             AutoRoute(page: CameraRoute.page),
             AutoRoute(
               page: SettingsRoute.page,
-              children: [
-                AutoRoute(
-                  page: ChangePasswordRoute.page,
-                  children: [
-                    AutoRoute(
-                      page: CodeRoute.page,
-                      children: [
-                        AutoRoute(
-                          page: CongratsRoute.page,
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                AutoRoute(page: EditProfileRoute.page),
-                AutoRoute(page: LanguageEditRoute.page),
-                AutoRoute(page: FaqRoute.page),
-                AutoRoute(page: FeedbackRoute.page),
-                AutoRoute(page: TermsAndPrivacyRoute.page),
-              ],
             ),
             AutoRoute(
               page: VolunteerDashboardRoute.page,
-              children: [
-                AutoRoute(page: TestCallRoute.page),
-              ],
             ),
           ],
         ),
