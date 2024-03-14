@@ -10,10 +10,12 @@ import 'package:companioneyes/src/viewmodel/auth/register_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart'; 
 
 @RoutePage()
 class RegisterView extends StatelessWidget {
-  const RegisterView({super.key});
+  const RegisterView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -21,24 +23,24 @@ class RegisterView extends StatelessWidget {
       child: Scaffold(
         appBar: const BackAppBar(),
         body: Consumer<RegisterViewModel>(builder: (context, viewModel, _) {
-          return SingleChildScrollView(
-            child: Align(
-              child: Padding(
-                padding: UIHelper.pagePadding(context),
-                child: Column(
-                  children: <Widget>[
-                    UIHelper.emptySpaceHeight(context, 0.02),
-                    _headlineText(context),
-                    UIHelper.emptySpaceHeight(context, 0.05),
-                    _fields(viewModel, context),
-                    UIHelper.emptySpaceHeight(context, 0.06),
-                    _buttons(context, viewModel),
-                  ],
+            return SingleChildScrollView(
+              child: Align(
+                child: Padding(
+                  padding: UIHelper.pagePadding(context),
+                  child: Column(
+                    children: <Widget>[
+                      UIHelper.emptySpaceHeight(context, 0.02),
+                      _headlineText(context),
+                      UIHelper.emptySpaceHeight(context, 0.05),
+                      _fields(viewModel, context),
+                      UIHelper.emptySpaceHeight(context, 0.06),
+                      _buttons(context, viewModel),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          );
-        }),
+            );
+          }),
       ),
     );
   }
@@ -48,9 +50,30 @@ class RegisterView extends StatelessWidget {
           SharedButton(
             color: UIHelper.black,
             title: "Next",
-            onPressed: !viewModel.isNextButtonActive
-                ? () => context.router.push(const PrivacyAndTermsRoute())
-                : null,
+            onPressed: () async {
+              if (viewModel.isNextButtonActive) {
+                try {
+                  UserCredential userCredential = await FirebaseAuth
+                      .instance
+                      .createUserWithEmailAndPassword(
+                    email: viewModel.emailController.text.trim(),
+                    password: viewModel.passwordController.text,
+                  );
+                  await FirebaseFirestore.instance.collection('users').doc(userCredential.user!.uid).set({
+                    'firstName': viewModel.firstNameController.text,
+                    'lastName': viewModel.lastNameController.text,
+                    'email': viewModel.emailController.text.trim(),
+                    'gender': viewModel.selectedGender,
+                    'language': viewModel.selectedLanguage,
+                  });
+                  context.router.push(const PrivacyAndTermsRoute());
+                } catch (e) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text("Registration failed: $e")),
+                  );
+                }
+              }
+            },
           ),
           UIHelper.emptySpaceHeight(context, 0.01),
           _alreadyAUser(context),
@@ -67,17 +90,17 @@ class RegisterView extends StatelessWidget {
   Text _alreadyAUser(BuildContext context) => Text(
         "Already a user?",
         style: TextStyle(
-            shadows: const [
-              Shadow(
-                color: UIHelper.formalGrey,
-                blurRadius: 20,
-              ),
-            ],
-            fontWeight: FontWeight.w500,
-            fontSize: UIHelper.getDynamicFontSize(
-              context,
-              UIHelper.fontSize16,
-            )),
+          shadows: const [
+            Shadow(
+              color: UIHelper.formalGrey,
+              blurRadius: 20,
+            ),
+          ],
+          fontWeight: FontWeight.w500,
+          fontSize: UIHelper.getDynamicFontSize(
+            context,
+            UIHelper.fontSize16,
+          )),
       );
 
   Column _fields(RegisterViewModel viewModel, BuildContext context) => Column(
@@ -99,9 +122,9 @@ class RegisterView extends StatelessWidget {
           ),
           UIHelper.emptySpaceHeight(context, 0.02),
           SharedTextFormField(
-              title: "Email",
-              controller: viewModel.emailController,
-              focusNode: viewModel.emailFocusNode),
+            title: "Email",
+            controller: viewModel.emailController,
+            focusNode: viewModel.emailFocusNode),
           UIHelper.emptySpaceHeight(context, 0.02),
           _dropDownField(context, viewModel, "Gender"),
           UIHelper.emptySpaceHeight(context, 0.02),
@@ -115,7 +138,7 @@ class RegisterView extends StatelessWidget {
         ],
       );
 
-  Column _dropDownField(
+  Column _dropDownField( 
       BuildContext context, RegisterViewModel viewModel, String title) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -130,9 +153,9 @@ class RegisterView extends StatelessWidget {
         ),
         UIHelper.emptySpaceHeight(context, 0.005),
         CustomDropdown(
-          closedHeaderPadding:
+          closedHeaderPadding: 
               EdgeInsets.all(UIHelper.getDynamicHeight(context, 0.016)),
-          expandedHeaderPadding:
+          expandedHeaderPadding: 
               EdgeInsets.all(UIHelper.getDynamicHeight(context, 0.016)),
           decoration: CustomDropdownDecoration(
             hintStyle: TextStyle(

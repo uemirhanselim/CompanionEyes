@@ -1,34 +1,29 @@
 import 'package:flutter/material.dart';
 
 class ForgotPasswordViewModel extends ChangeNotifier {
-  ForgotPasswordViewModel() {
-// Add your initialization code here
-  }
-// Setters
-  final TextEditingController _phoneNumberController = TextEditingController();
-  final TextEditingController _newPasswordController = TextEditingController();
-  final TextEditingController _confirmPasswordController =
-      TextEditingController();
-  final FocusNode _phoneNumberFocusNode = FocusNode();
-  final FocusNode _newPasswordFocusNode = FocusNode();
-  final FocusNode _confirmPasswordFocusNode = FocusNode();
-// Getters
-  TextEditingController get phoneNumberController => _phoneNumberController;
-  TextEditingController get newPasswordController => _newPasswordController;
-  TextEditingController get confirmPasswordController =>
-      _confirmPasswordController;
-  FocusNode get phoneNumberFocusNode => _phoneNumberFocusNode;
-  FocusNode get newPasswordFocusNode => _newPasswordFocusNode;
-  FocusNode get confirmPasswordFocusNode => _confirmPasswordFocusNode;
-// Other methods
+  final TextEditingController emailController = TextEditingController();
+  final FocusNode emailFocusNode = FocusNode();
 
-set setPhoneNumber(String phoneNumber) {
-    _phoneNumberController.text = phoneNumber;
+  bool _isResetButtonActive = false;
+
+  bool get isResetButtonActive => _isResetButtonActive;
+
+  void setIsResetButtonActive(bool value) {
+    _isResetButtonActive = value;
     notifyListeners();
   }
 
-  bool get isNextButtonActive =>
-      _phoneNumberController.text.isNotEmpty &&
-      _newPasswordController.text.isNotEmpty &&
-      _confirmPasswordController.text.isNotEmpty;
+  void init() {
+    emailController.addListener(_updateResetButtonState);
+  }
+
+  void dispose() {
+    emailController.removeListener(_updateResetButtonState);
+    emailController.dispose();
+    emailFocusNode.dispose();
+  }
+
+  void _updateResetButtonState() {
+    setIsResetButtonActive(emailController.text.isNotEmpty);
+  }
 }

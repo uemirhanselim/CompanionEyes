@@ -9,10 +9,11 @@ import 'package:companioneyes/src/viewmodel/auth/login_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 @RoutePage()
 class LoginView extends StatelessWidget {
-  const LoginView({super.key});
+  const LoginView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -49,9 +50,21 @@ class LoginView extends StatelessWidget {
           SharedButton(
             color: UIHelper.black,
             title: "Next",
-            onPressed: !viewModel.isNextButtonActive
-                ? () => context.router.push(const HomeRoute())
-                : null,
+            onPressed: () async {
+              if (viewModel.isNextButtonActive) {
+                try {
+                  await FirebaseAuth.instance.signInWithEmailAndPassword(
+                    email: viewModel.emailController.text.trim(),
+                    password: viewModel.passwordController.text,
+                  );
+                  context.router.push(const HomeRoute());
+                } catch (e) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text("The login failed: $e")),
+                  );
+                }
+              }
+            },
           ),
           UIHelper.emptySpaceHeight(context, 0.032),
           SharedButton(
@@ -66,9 +79,9 @@ class LoginView extends StatelessWidget {
   Column _fields(LoginViewModel viewModel, BuildContext context) => Column(
         children: [
           SharedTextFormField(
-              title: "Email",
-              controller: viewModel.emailController,
-              focusNode: viewModel.emailFocusNode),
+            title: "Email",
+            controller: viewModel.emailController,
+            focusNode: viewModel.emailFocusNode),
           UIHelper.emptySpaceHeight(context, 0.02),
           SharedTextFormField(
             title: "Password",
