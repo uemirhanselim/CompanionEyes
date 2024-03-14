@@ -7,10 +7,12 @@ class SharedTextFormField extends StatefulWidget {
     required this.title,
     required this.controller,
     required this.focusNode,
+    this.onChanged,
   });
   final String title;
   final TextEditingController controller;
   final FocusNode focusNode;
+  final Function(String)? onChanged;
 
   @override
   State<SharedTextFormField> createState() => _SharedTextFormFieldState();
@@ -55,6 +57,7 @@ class _SharedTextFormFieldState extends State<SharedTextFormField> {
             maxLines: widget.title == "Description" ? 5 : 1,
             obscureText: widget.title.contains("Password") ? _isObscure : false,
             keyboardType: TextInputType.text,
+            onChanged: widget.onChanged,
             decoration: InputDecoration(
               filled: true,
               hintText: "Enter ${widget.title}",
