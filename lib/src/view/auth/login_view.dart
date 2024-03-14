@@ -68,12 +68,18 @@ class LoginView extends StatelessWidget {
           SharedTextFormField(
               title: "Email",
               controller: viewModel.emailController,
-              focusNode: viewModel.emailFocusNode),
+              focusNode: viewModel.emailFocusNode,
+              onChanged: (value) {
+                viewModel.setIsEmailEntered = value.isNotEmpty;
+              }),
           UIHelper.emptySpaceHeight(context, 0.02),
           SharedTextFormField(
             title: "Password",
             controller: viewModel.passwordController,
             focusNode: viewModel.passwordFocusNode,
+            onChanged: (value) {
+              viewModel.setIsPasswordEntered = value.isNotEmpty;
+            },
           ),
         ],
       );
