@@ -20,6 +20,7 @@ import 'package:companioneyes/src/view/support/faq_view.dart';
 import 'package:companioneyes/src/view/support/feedback_view.dart';
 import 'package:companioneyes/src/view/terms_and_privacy/terms_and_privacy_view.dart';
 import 'package:companioneyes/src/view/test_call/test_call_view.dart';
+import 'package:flutter/material.dart';
 
 part 'app_router.gr.dart';
 
@@ -30,7 +31,7 @@ class AppRouter extends _$AppRouter {
         AutoRoute(page: SplashRoute.page),
         AutoRoute(page: OpeningRoute.page, initial: true),
         AutoRoute(page: PrivacyAndTermsRoute.page),
-        AutoRoute(page: RegisterRoute.page),
+        AutoRoute(page: RegisterRoute.page, path: "/register/:isVolunteer"),
         AutoRoute(page: LoginRoute.page),
         AutoRoute(page: ForgotPasswordRoute.page),
         AutoRoute(page: CodeRoute.page),
