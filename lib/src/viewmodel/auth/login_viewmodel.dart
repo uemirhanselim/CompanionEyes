@@ -18,6 +18,8 @@ class LoginViewModel extends ChangeNotifier {
   final FocusNode _emailFocusNode = FocusNode();
   final FocusNode _passwordFocusNode = FocusNode();
   bool _isLoading = false;
+  bool _isEmailEntered = false;
+  bool _isPasswordEntered = false;
 
 // Getters
   TextEditingController get emailController => _emailController;
@@ -25,13 +27,24 @@ class LoginViewModel extends ChangeNotifier {
   FocusNode get emailFocusNode => _emailFocusNode;
   FocusNode get passwordFocusNode => _passwordFocusNode;
   bool get isLoading => _isLoading;
+  bool get isEmailEntered => _isEmailEntered;
+  bool get isPasswordEntered => _isPasswordEntered;
 
 // Other methods
-  bool get isNextButtonActive =>
-      _emailController.text.isNotEmpty && _passwordController.text.isNotEmpty;
+  bool get isNextButtonActive => _isEmailEntered && _isPasswordEntered;
 
   set setIsLoading(bool value) {
     _isLoading = value;
+    notifyListeners();
+  }
+
+  set setIsEmailEntered(bool value) {
+    _isEmailEntered = value;
+    notifyListeners();
+  }
+
+  set setIsPasswordEntered(bool value) {
+    _isPasswordEntered = value;
     notifyListeners();
   }
 
@@ -40,6 +53,7 @@ class LoginViewModel extends ChangeNotifier {
     await _authService
         .login(email: _emailController.text, password: _passwordController.text)
         .then((status) {
+      setIsLoading = false;
       if (status == AuthStatus.successful) {
         context.router.push(const HomeRoute());
       } else {

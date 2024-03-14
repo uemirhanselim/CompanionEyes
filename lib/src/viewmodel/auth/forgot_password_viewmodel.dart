@@ -9,7 +9,6 @@ class ForgotPasswordViewModel extends ChangeNotifier {
   // Dependencies
   final AuthService _authService = locator.get<AuthService>();
 
-
   // Setters
   final TextEditingController _emailController = TextEditingController();
   final FocusNode _emailFocusNode = FocusNode();
@@ -33,6 +32,10 @@ class ForgotPasswordViewModel extends ChangeNotifier {
         .then(
       (status) async {
         if (status == AuthStatus.successful) {
+          CustomSnackBar.showSuccessSnackBar(
+            context,
+            message: "Password reset email sent successfully",
+          );
           await context.router.pop();
         } else {
           final error = AuthExceptionHandler.generateErrorMessage(status);
