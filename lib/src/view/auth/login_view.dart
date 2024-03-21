@@ -7,7 +7,6 @@ import 'package:companioneyes/src/view/widgets/shared_text_form_field.dart';
 import 'package:companioneyes/src/viewmodel/auth/login_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 @RoutePage()
 class LoginView extends StatelessWidget {
