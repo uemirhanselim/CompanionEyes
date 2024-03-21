@@ -2,10 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:circle_nav_bar/circle_nav_bar.dart';
 import 'package:companioneyes/src/routes/app_router.dart';
 import 'package:companioneyes/src/utils/ui_helper.dart';
-import 'package:companioneyes/src/view/camera/camera_view.dart';
-import 'package:companioneyes/src/view/dashboard/impaired_dashboard_view.dart';
-import 'package:companioneyes/src/view/dashboard/volunteer_dashboard_view.dart';
-import 'package:companioneyes/src/view/settings/settings_view.dart';
 import 'package:companioneyes/src/viewmodel/dashboard/impaired_dashboard_viewmodel.dart';
 import 'package:companioneyes/src/viewmodel/dashboard/volunteer_dashboard_viewmodel.dart';
 import 'package:companioneyes/src/viewmodel/home/home_viewmodel.dart';
@@ -29,8 +25,8 @@ class HomeView extends StatelessWidget {
         builder: (context, viewModel, index) {
           return AutoTabsScaffold(
               routes: viewModel.isVolunteer
-                      ? _routesForVolunteer
-                      : _routesForImpaired,
+                  ? _routesForVolunteer
+                  : _routesForImpaired,
               backgroundColor: UIHelper.white,
               // body: viewModel.isPageLoading
               //     ? const Center(child: CircularProgressIndicator())
@@ -48,7 +44,7 @@ class HomeView extends StatelessWidget {
                       : _inactiveIconsForImpaired,
                   height: 70,
                   circleWidth: 62,
-                  onTap: (index) => tabsRouter.setActiveIndex(index),
+                  onTap: tabsRouter.setActiveIndex,
                   color: UIHelper.blackOut,
                   cornerRadius: const BorderRadius.only(
                     topLeft: Radius.circular(16),
