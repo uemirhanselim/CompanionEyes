@@ -55,7 +55,7 @@ class LoginViewModel extends ChangeNotifier {
         .then((status) {
       setIsLoading = false;
       if (status == AuthStatus.successful) {
-        context.router.push(const HomeRoute());
+        context.router.replace(const HomeRoute());
       } else {
         final error = AuthExceptionHandler.generateErrorMessage(status);
         CustomSnackBar.showErrorSnackBar(
