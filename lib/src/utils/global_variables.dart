@@ -1,5 +1,5 @@
 class GlobalVariables {
-  bool _isVolunteer = true;
+  bool _isVolunteer = false;
 
   bool get isVolunteer => _isVolunteer;
 

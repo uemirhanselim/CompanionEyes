@@ -4,7 +4,7 @@ class HomeViewModel extends ChangeNotifier {
   HomeViewModel() {
 // Add your initialization code here
     // getUserStatus();
-    setIsVolunteer = true;
+    setIsVolunteer = false;
   }
 // Setters
   late final bool _isVolunteer;
