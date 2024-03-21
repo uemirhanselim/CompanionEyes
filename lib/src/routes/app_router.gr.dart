@@ -106,9 +106,13 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     RegisterRoute.name: (routeData) {
+      final args = routeData.argsAs<RegisterRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const RegisterView(),
+        child: RegisterView(
+          key: args.key,
+          isVolunteer: args.isVolunteer,
+        ),
       );
     },
     SettingsRoute.name: (routeData) {
@@ -356,16 +360,40 @@ class PrivacyAndTermsRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [RegisterView]
-class RegisterRoute extends PageRouteInfo<void> {
-  const RegisterRoute({List<PageRouteInfo>? children})
-      : super(
+class RegisterRoute extends PageRouteInfo<RegisterRouteArgs> {
+  RegisterRoute({
+    Key? key,
+    required bool isVolunteer,
+    List<PageRouteInfo>? children,
+  }) : super(
           RegisterRoute.name,
+          args: RegisterRouteArgs(
+            key: key,
+            isVolunteer: isVolunteer,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'RegisterRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<RegisterRouteArgs> page =
+      PageInfo<RegisterRouteArgs>(name);
+}
+
+class RegisterRouteArgs {
+  const RegisterRouteArgs({
+    this.key,
+    required this.isVolunteer,
+  });
+
+  final Key? key;
+
+  final bool isVolunteer;
+
+  @override
+  String toString() {
+    return 'RegisterRouteArgs{key: $key, isVolunteer: $isVolunteer}';
+  }
 }
 
 /// generated route for

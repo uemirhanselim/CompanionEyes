@@ -76,7 +76,12 @@ class OpeningView extends StatelessWidget {
             child: ElevatedButton(
               onPressed: () async {
                 viewModel.updateUserStatus(isVolunteer).then(
-                    (value) => context.router.push(const RegisterRoute()));
+                      (value) => context.router.push(
+                        RegisterRoute(
+                          isVolunteer: isVolunteer,
+                        ),
+                      ),
+                    );
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor:

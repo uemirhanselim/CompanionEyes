@@ -7,10 +7,12 @@ class SharedButton extends StatelessWidget {
     required this.title,
     required this.color,
     required this.onPressed,
+    this.isLoading = false,
   });
   final String title;
   final Color color;
   final VoidCallback? onPressed;
+  final bool isLoading;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -25,16 +27,22 @@ class SharedButton extends StatelessWidget {
             elevation: 10,
           ),
           onPressed: onPressed,
-          child: Text(
-            title,
-            style: TextStyle(
-                fontSize: UIHelper.getDynamicFontSize(
-                  context,
-                  UIHelper.fontSize16,
-                ),
-                color: UIHelper.white,
-                fontWeight: FontWeight.w600),
-          )),
+          child: isLoading
+              ? const Center(
+                  child: CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation<Color>(UIHelper.white),
+                  ),
+                )
+              : Text(
+                  title,
+                  style: TextStyle(
+                      fontSize: UIHelper.getDynamicFontSize(
+                        context,
+                        UIHelper.fontSize16,
+                      ),
+                      color: UIHelper.white,
+                      fontWeight: FontWeight.w600),
+                )),
     );
   }
 }

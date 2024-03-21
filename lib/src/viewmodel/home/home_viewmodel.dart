@@ -1,11 +1,10 @@
-import 'package:companioneyes/src/local/user_status_database.dart';
 import 'package:flutter/material.dart';
 
 class HomeViewModel extends ChangeNotifier {
   HomeViewModel() {
 // Add your initialization code here
     // getUserStatus();
-    setIsVolunteer = true;
+    setIsVolunteer = false;
   }
 // Setters
   late final bool _isVolunteer;

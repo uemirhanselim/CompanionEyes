@@ -10,10 +10,10 @@ class TestCallView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: BackAppBar(),
+      appBar: const BackAppBar(),
       body: Padding(
         padding: UIHelper.pagePadding(context),
-        child: Column(
+        child: const Column(
           children: <Widget>[],
         ),
       ),

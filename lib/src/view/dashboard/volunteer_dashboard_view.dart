@@ -37,7 +37,14 @@ class VolunteerDashboardView extends StatelessWidget {
   }
 
   TextButton _answerCallButton(BuildContext context) => TextButton(
-      onPressed: () => context.router.push(const TestCallRoute()),
+      style: ButtonStyle(
+        padding: MaterialStateProperty.all(EdgeInsets.zero),
+      ),
+      onPressed: () {
+        debugPrint("Navigation stack 10: ${context.router.current.path}");
+        context.router.push(const TestCallRoute());
+        debugPrint("Navigation stack 11: ${context.router.current.path}");
+      },
       child: _card(context, _answerCallText(context), isSmall: true));
 
   Text _answerCallText(BuildContext context) => _text(
