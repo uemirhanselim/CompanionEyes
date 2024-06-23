@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:companioneyes/src/local/local_storage.dart';
 import 'package:companioneyes/src/model/auth/new_user.dart';
 import 'package:companioneyes/src/service/error/auth_exception_handler.dart';
+import 'package:companioneyes/src/utils/local_storage_keys.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthService {
@@ -24,7 +26,12 @@ class AuthService {
   }) async {
     AuthStatus status = AuthStatus.unknown;
     try {
-      await _auth.signInWithEmailAndPassword(email: email, password: password);
+      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
+      await LocalStorageService.instance.setString(
+        LocalStorageKeys.userCredential,
+        userCredential.user!.uid,
+      );
       status = AuthStatus.successful;
     } on FirebaseAuthException catch (e) {
       status = AuthExceptionHandler.handleAuthException(e);
@@ -42,6 +49,11 @@ class AuthService {
         email: newUser.email,
         password: newUser.password,
       );
+      await LocalStorageService.instance.setString(
+        LocalStorageKeys.userCredential,
+        userCredential.user!.uid,
+      );
+      print("goes here");
       String userType = newUser.isVolunteer ? 'volunteer' : 'visuallyImpaired';
       await FirebaseFirestore.instance
           .collection(userType)
@@ -52,11 +64,14 @@ class AuthService {
         'email': newUser.email,
         'gender': newUser.gender,
         'language': newUser.language,
+        'fcmToken': newUser.fcmToken,
+        'status': newUser.status.toString().split('.').last,
       });
 
       status = AuthStatus.successful;
     } on FirebaseAuthException catch (e) {
       status = AuthExceptionHandler.handleAuthException(e);
+      print("Hata" + e.toString());
     }
     return status;
   }

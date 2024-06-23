@@ -181,7 +181,7 @@ class RegisterView extends StatelessWidget {
               ),
             ),
             items: title == "Gender" ? viewModel.genders : viewModel.languages,
-            onChanged: (String text) {
+            onChanged: (String? text) {
               if (title == "Gender") {
                 viewModel.setSelectedGender = text;
               } else if (title == "Language") {

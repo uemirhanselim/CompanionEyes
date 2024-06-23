@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 @RoutePage()
 class VolunteerDashboardView extends StatelessWidget {
   const VolunteerDashboardView({super.key});
+  
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(

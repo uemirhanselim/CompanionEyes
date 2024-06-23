@@ -16,6 +16,7 @@ class OpeningViewModel extends ChangeNotifier {
         .updateUserStatus(isUserLoggedIn: false, isVolunteer: isVolunteer)
         .then((value) {
       globalVariables.setIsVolunteer = isVolunteer;
+      print("Global User status is: ${globalVariables.isVolunteer}");
     });
   }
 }
