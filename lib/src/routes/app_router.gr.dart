@@ -139,6 +139,17 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const TestCallView(),
       );
     },
+    VideoCallRoute.name: (routeData) {
+      final args = routeData.argsAs<VideoCallRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: VideoCallView(
+          key: args.key,
+          pRoomId: args.pRoomId,
+          helpDefinition: args.helpDefinition,
+        ),
+      );
+    },
     VolunteerDashboardRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -450,6 +461,49 @@ class TestCallRoute extends PageRouteInfo<void> {
   static const String name = 'TestCallRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [VideoCallView]
+class VideoCallRoute extends PageRouteInfo<VideoCallRouteArgs> {
+  VideoCallRoute({
+    Key? key,
+    required String? pRoomId,
+    String? helpDefinition,
+    List<PageRouteInfo>? children,
+  }) : super(
+          VideoCallRoute.name,
+          args: VideoCallRouteArgs(
+            key: key,
+            pRoomId: pRoomId,
+            helpDefinition: helpDefinition,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'VideoCallRoute';
+
+  static const PageInfo<VideoCallRouteArgs> page =
+      PageInfo<VideoCallRouteArgs>(name);
+}
+
+class VideoCallRouteArgs {
+  const VideoCallRouteArgs({
+    this.key,
+    required this.pRoomId,
+    this.helpDefinition,
+  });
+
+  final Key? key;
+
+  final String? pRoomId;
+
+  final String? helpDefinition;
+
+  @override
+  String toString() {
+    return 'VideoCallRouteArgs{key: $key, pRoomId: $pRoomId, helpDefinition: $helpDefinition}';
+  }
 }
 
 /// generated route for

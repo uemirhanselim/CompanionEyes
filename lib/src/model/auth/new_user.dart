@@ -5,6 +5,8 @@ class NewUser {
   final String lastName;
   final String gender;
   final String language;
+  final String fcmToken;
+  final UserStatusEnum status;
   final bool isVolunteer;
 
   NewUser({
@@ -14,6 +16,10 @@ class NewUser {
     required this.lastName,
     required this.gender,
     required this.language,
+    required this.fcmToken,
+    required this.status,
     required this.isVolunteer,
   });
 }
+
+enum UserStatusEnum { oncall, available, offline, busy }

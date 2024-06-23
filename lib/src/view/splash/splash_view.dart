@@ -4,17 +4,19 @@ import 'package:companioneyes/src/viewmodel/splash/splash_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-@RoutePage() 
+@RoutePage()
 class SplashView extends StatelessWidget {
   const SplashView({super.key});
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => SplashViewModel(),
-      child: Scaffold(
-        backgroundColor: UIHelper.saltwaterDenim,
-        body: _centerWidget,
-      ),
+      create: (_) => SplashViewModel(context),
+      child: Consumer<SplashViewModel>(builder: (context, viewmodel, _) {
+        return Scaffold(
+          backgroundColor: UIHelper.saltwaterDenim,
+          body: _centerWidget,
+        );
+      }),
     );
   }
 

@@ -4,12 +4,15 @@ import 'package:companioneyes/src/model/auth/new_user.dart';
 import 'package:companioneyes/src/routes/app_router.dart';
 import 'package:companioneyes/src/service/auth/auth_service.dart';
 import 'package:companioneyes/src/service/error/auth_exception_handler.dart';
+import 'package:companioneyes/src/service/notification/local_notification_service.dart';
 import 'package:companioneyes/src/utils/custom_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class RegisterViewModel extends ChangeNotifier {
   final AuthService _authService = locator.get<AuthService>();
+  final LocalNotificationService _localNotificationService =
+      locator.get<LocalNotificationService>();
   RegisterViewModel({required bool isVolunteer}) {
     setIsVolunteer = isVolunteer;
   }
@@ -111,7 +114,7 @@ class RegisterViewModel extends ChangeNotifier {
 
   Future<void> createAccount(BuildContext context) async {
     setIsLoading = true;
-
+    String? fmcToken = await _localNotificationService.getFcmToken() ?? "";
     final NewUser newUser = NewUser(
       email: _emailController.text.trim(),
       password: _passwordController.text,
@@ -120,8 +123,10 @@ class RegisterViewModel extends ChangeNotifier {
       gender: _selectedGender ?? "",
       language: _selectedLanguage ?? "",
       isVolunteer: _isVolunteer,
+      fcmToken: fmcToken,
+      status: UserStatusEnum.available,
     );
-
+    print("1. numara");
     await _authService.createAccount(newUser: newUser).then((status) {
       if (status == AuthStatus.successful) {
         setIsLoading = false;
