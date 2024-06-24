@@ -9,11 +9,19 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_gemini/flutter_gemini.dart';
+import 'package:companioneyes/src/view/camera/consts.dart';
+import 'package:companioneyes/src/view/camera/camera_view.dart';
 
 final GlobalKey<ScaffoldMessengerState> navigatorKey =
     GlobalKey<ScaffoldMessengerState>();
 
 void main() async {
+
+  Gemini.init(
+    apiKey: GEMINI_API_KEY,
+  );
+
   WidgetsFlutterBinding.ensureInitialized();
   initLocator();
   // Firebase initialization

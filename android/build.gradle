@@ -1,3 +1,15 @@
+buildscript {
+    ext.kotlin_version = '2.0.0'  // Kotlin sürümünü güncelledik
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.0.2'  // Gradle Plugin sürümü
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
 allprojects {
     repositories {
         google()
